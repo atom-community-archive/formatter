@@ -11,6 +11,14 @@ Provides a service API that you can register by scope name to send Async formatt
 
 * [TypeScript](https://atom.io/packages/atom-typescript)
 
+# Keybindings
+
+Default (inspired from IntelliJ):
+```cson
+'atom-text-editor':
+  'alt-ctrl-l': 'formatter:format-code'
+  'alt-cmd-l': 'formatter:format-code'
+```
 
 # API for Providers
 
