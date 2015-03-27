@@ -43,11 +43,21 @@ class Module
 
     # We only support the highest prirority provider for now:
     provider = providers[0]
-    edits = Promise.resolve(provider.getCodeEdits({editor,selection}))
-    edits.then (edits) ->
-      applyEdits(editor, edits)
-
-
+    if provider.getCodeEdits
+      edits = Promise.resolve(provider.getCodeEdits({editor,selection}))
+      edits.then (edits) ->
+        applyEdits(editor, edits)
+    else if provider.getNewText
+      text = editor.getSelectedText()
+      if !text
+        selected = false
+        text = editor.getText();
+      return if !text
+      newText = provider.getNewText(text)
+      if (selected)
+        editor.replaceSelectedText(newText)
+      else
+        editor.setText(newText)
   ###
   Section: Services API
   ###

@@ -42,12 +42,13 @@ interface Selection {
 }
 ```
 
-The Provider really needs to be a `FormatterProvider`. It needs to provide:
- * a selector for which it will work
- * a `getCodeEdits` function that gets passed in `FormattingOptions` and returns a bunch of `CodeEdit[]` or a promise thereof.
+The Provider really needs to be a `FormatterProvider`. It needs to provide a selector for which it will work. And then Either of the two:
+ * a `getCodeEdits` function that gets passed in `FormattingOptions` and returns a bunch of `CodeEdit[]` or a promise thereof. This method is preferred as we do not create a `string`.
+ * a `getNewText` function that gets passed in text and then returns
+ formatted text. This is slower as we create and pass around strings.
 
 ```ts
-interface FormattingOptions {
+interface CodeEditOptions {
     editor: AtomCore.IEditor;
 
     // only if there is a selection
@@ -57,7 +58,10 @@ interface FormattingOptions {
 interface FormatterProvider {
     selector: string;
     disableForSelector?: string;
-    getCodeEdits: (options: FormattingOptions) => CodeEdits[] | Promise<CodeEdit[]>;
+
+    // One of:
+    getCodeEdits: (options: CodeEditOptions) => CodeEdits[] | Promise<CodeEdit[]>;
+    getNewText: (oldText: string) => string | Promise<string>;
 }
 ```
 
