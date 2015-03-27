@@ -34,7 +34,9 @@ interface Selection {
 }
 ```
 
-The Provider really needs to be a `FormatterProvider`, It gets passed in `FormattingOptions` and returns a bunch of `CodeEdit[]` or a promise thereof.
+The Provider really needs to be a `FormatterProvider`. It needs to provide:
+ * a selector for which it will work
+ * a `getCodeEdits` function that gets passed in `FormattingOptions` and returns a bunch of `CodeEdit[]` or a promise thereof.
 
 ```ts
 interface FormattingOptions {
@@ -45,7 +47,7 @@ interface FormattingOptions {
 }
 
 interface FormatterProvider {
-    selector?: string;
+    selector: string;
     disableForSelector?: string;
     getCodeEdits: (options: FormattingOptions) => CodeEdits[] | Promise<CodeEdit[]>;
 }
