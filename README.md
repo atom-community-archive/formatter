@@ -9,6 +9,7 @@ Provides a service API that you can register by scope name to send Async formatt
 
 # Providers
 
+* [formatter-coffeescript](https://atom.io/packages/formatter-coffeescript)
 * [TypeScript](https://atom.io/packages/atom-typescript)
 
 # Keybindings
