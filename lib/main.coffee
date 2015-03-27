@@ -53,11 +53,12 @@ class Module
         selected = false
         text = editor.getText();
       return if !text
-      newText = provider.getNewText(text)
-      if (selected)
-        editor.replaceSelectedText(newText)
-      else
-        editor.setText(newText)
+      newText = Promise.resolve(provider.getNewText(text))
+      newText.then (newText) ->
+        if (selected)
+          editor.replaceSelectedText(newText)
+        else
+          editor.setText(newText)
   ###
   Section: Services API
   ###
