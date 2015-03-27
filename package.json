@@ -1,0 +1,33 @@
+{
+  "name": "formatter",
+  "version": "2.7.0",
+  "main": "./lib/main",
+  "description": "Formats your code using formatters",
+  "repository": "https://github.com/AtomFormatter/formatter",
+  "engines": {
+    "atom": ">=0.183.0"
+  },
+  "dependencies": {
+    "atom-slick": "^2.0.0",
+    "clear-cut": "^0.4.0",
+    "fuzzaldrin": "^2.1.0",
+    "grim": "^1.2.0",
+    "minimatch": "^2.0.1",
+    "selector-kit": "^0.1",
+    "semver": "^4.3.1",
+    "stable": "^0.1.5",
+    "underscore-plus": "^1.6.6"
+  },
+  "devDependencies": {
+    "coffeelint": ">=1.8.1",
+    "fs-plus": ">=2.4.0",
+    "temp": ">=0.7.0"
+  },
+  "consumedServices": {
+    "formatter": {
+      "versions": {
+        "1.0.0": "consumeFormatter"
+      }
+    }
+  }
+}
