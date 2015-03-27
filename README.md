@@ -1,4 +1,4 @@
-# Atom Formatter
+# Formatter
 The core dependency you need to support formatting services
 
 Provides a service API that you can register by scope name to send Async formatting edits.
