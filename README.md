@@ -1,5 +1,6 @@
-# Formatter
-The core dependency you need to support formatting services
+# `formatter` [![Build Status](https://travis-ci.org/atom-community/formatter.svg?branch=master)](https://travis-ci.org/atom-community/formatter) [![Build status](https://ci.appveyor.com/api/projects/status/p7o66o3jx9uxa1qd/branch/master?svg=true)](https://ci.appveyor.com/project/joefitzgerald/formatter/branch/master)
+
+The core dependency you need to support formatting services.
 
 Provides a service API that you can register by scope name to send Async formatting edits.
 
