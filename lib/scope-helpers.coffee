@@ -5,7 +5,8 @@ slick = require 'atom-slick'
 EscapeCharacterRegex = /[-!"#$%&'*+,/:;=?@|^~()<>{}[\]]/g
 
 parseScopeChain = (scopeChain) ->
-  scopeChain = scopeChain.replace EscapeCharacterRegex, (match) -> "\\#{match[0]}"
+  scopeChain = scopeChain.replace EscapeCharacterRegex,
+    (match) -> "\\#{match[0]}"
   scope for scope in slick.parse(scopeChain)[0] ? []
 
 selectorForScopeChain = (selectors, scopeChain) ->
@@ -19,4 +20,5 @@ selectorForScopeChain = (selectors, scopeChain) ->
 selectorsMatchScopeChain = (selectors, scopeChain) ->
   selectorForScopeChain(selectors, scopeChain)?
 
-module.exports = {parseScopeChain, selectorsMatchScopeChain, selectorForScopeChain}
+module.exports = {parseScopeChain, selectorsMatchScopeChain,
+  selectorForScopeChain}
