@@ -52,7 +52,7 @@ class Module
       text = editor.getSelectedText()
       if !text
         selected = false
-        text = editor.getText() ;
+        text = editor.getText();
       return if !text
       newText = Promise.resolve(provider.getNewText(text))
       newText.then (newText) ->
@@ -79,11 +79,12 @@ applyEdits = (editor, edits) ->
   editor.transact ->
     for edit in edits
       editor.setTextInBufferRange([[edit.start.line, edit.start.col],
-      [edit.end.line, edit.end.col]], edit.newText) ;
+      [edit.end.line, edit.end.col]], edit.newText);
 
 
 # Manages scope resolution
-## inspiration : https://github.com/atom-community/autocomplete-plus/blob/master/lib/provider-manager.coffee
+## inspiration :
+## atom-community/autocomplete-plus/blob/master/lib/provider-manager.coffee
 class ProviderManager
   constructor: ->
     @providers = []
