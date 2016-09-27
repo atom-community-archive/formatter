@@ -106,8 +106,8 @@ class ProviderManager
 
     matchingProviders = (provider for provider in matchingProviders when (provider.inclusionPriority ? 0) >= lowestIncludedPriority)
     stableSort matchingProviders, (providerA, providerB) =>
-      specificityA = @metadataForProvider(providerA).getSpecificity(scopeChain)
-      specificityB = @metadataForProvider(providerB).getSpecificity(scopeChain)
+      specificityA = new ProviderMetadata(providerA).getSpecificity(scopeChain)
+      specificityB = new ProviderMetadata(providerB).getSpecificity(scopeChain)
       difference = specificityB - specificityA
       difference = (providerB.suggestionPriority ? 1) - (providerA.suggestionPriority ? 1) if difference is 0
       difference
