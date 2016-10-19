@@ -24,3 +24,5 @@ class ProviderMetadata
       selector.getSpecificity()
     else
       0
+
+  dispose: ->

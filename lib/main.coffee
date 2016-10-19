@@ -88,7 +88,9 @@ class ProviderManager
 
   registerProvider: (provider) ->
     return unless provider?
-    @providers.push(new ProviderMetadata(provider))
+    providerMetadata = new ProviderMetadata(provider)
+    @providers.push(providerMetadata)
+    return providerMetadata
 
   providersForScopeDescriptor: (scopeDescriptor) =>
     scopeChain = scopeChainForScopeDescriptor(scopeDescriptor)
