@@ -8,7 +8,7 @@ class Module
 
   activate: ->
     @providerManager = new ProviderManager
-    @disposible = new CompositeDisposable
+    @disposible = new CompositeDisposable()
     @registerCommands()
     return
 
@@ -67,7 +67,8 @@ class Module
     return unless providers?.length > 0
     registrations = new CompositeDisposable
     for provider in providers
-      registrations.add @providerManager.registerProvider(provider)
+      @prv = @providerManager.registerProvider(provider)
+      registrations.add @prv
     registrations
 
 
@@ -86,9 +87,14 @@ class ProviderManager
   constructor: ->
     @providers = []
 
+  dispose: () ->
+    @providers = null
+
   registerProvider: (provider) ->
     return unless provider?
-    @providers.push(new ProviderMetadata(provider))
+    prv = new ProviderMetadata(provider)
+    @providers.push(prv)
+    prv
 
   providersForScopeDescriptor: (scopeDescriptor) =>
     scopeChain = scopeChainForScopeDescriptor(scopeDescriptor)
