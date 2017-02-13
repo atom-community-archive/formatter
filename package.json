@@ -1,6 +1,6 @@
 {
   "name": "formatter",
-  "version": "2.12.3",
+  "version": "2.12.4",
   "main": "./lib/main",
   "description": "Format your files automatically on save or on-demand by running commands.",
   "repository": "https://github.com/atom-community/formatter",
