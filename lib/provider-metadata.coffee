@@ -8,7 +8,8 @@ module.exports =
 class ProviderMetadata
   constructor: (@provider) ->
     @selectors = Selector.create(@provider.selector)
-    @disableForSelectors = Selector.create(@provider.disableForSelector) if @provider.disableForSelector?
+    @disableForSelectors = Selector.create(@provider.disableForSelector) \
+    if @provider.disableForSelector?
 
   matchesScopeChain: (scopeChain) ->
     if @disableForSelectors?

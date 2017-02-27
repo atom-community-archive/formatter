@@ -17,7 +17,8 @@ class Module
     return
 
   registerCommands: () ->
-    @disposible.add atom.commands.add('atom-text-editor', 'formatter:format-code', @formatCode)
+    @disposible.add atom.commands.add('atom-text-editor',
+    'formatter:format-code', @formatCode)
 
   formatCode: =>
     editor = atom.workspace.getActiveTextEditor()
@@ -44,14 +45,14 @@ class Module
     # We only support the highest prirority provider for now:
     provider = providers[0]
     if provider.getCodeEdits
-      edits = Promise.resolve(provider.getCodeEdits({editor,selection}))
+      edits = Promise.resolve(provider.getCodeEdits({editor, selection} ))
       edits.then (edits) ->
         applyEdits(editor, edits)
     else if provider.getNewText
       text = editor.getSelectedText()
       if !text
         selected = false
-        text = editor.getText();
+        text = editor.getText()
       return if !text
       newText = Promise.resolve(provider.getNewText(text))
       newText.then (newText) ->
@@ -74,14 +75,16 @@ class Module
 
 
 # Utility function to apply the edits
-applyEdits = (editor,edits) ->
+applyEdits = (editor, edits) ->
   editor.transact ->
     for edit in edits
-      editor.setTextInBufferRange([[edit.start.line, edit.start.col], [edit.end.line, edit.end.col]], edit.newText);
+      editor.setTextInBufferRange([[edit.start.line, edit.start.col],
+      [edit.end.line, edit.end.col]], edit.newText)
 
 
 # Manages scope resolution
-## inspiration : https://github.com/atom-community/autocomplete-plus/blob/master/lib/provider-manager.coffee
+## inspiration :
+## atom-community/autocomplete-plus/blob/master/lib/provider-manager.coffee
 class ProviderManager
   constructor: ->
     @providers = []
@@ -104,14 +107,17 @@ class ProviderManager
       if providerMetadata.matchesScopeChain(scopeChain)
         matchingProviders.push(provider)
         if provider.excludeLowerPriority?
-          lowestIncludedPriority = Math.max(lowestIncludedPriority, provider.inclusionPriority ? 0)
+          lowestIncludedPriority = Math.max(lowestIncludedPriority,
+          provider.inclusionPriority ? 0)
 
-    matchingProviders = (provider for provider in matchingProviders when (provider.inclusionPriority ? 0) >= lowestIncludedPriority)
+    matchingProviders = (provider for provider in matchingProviders when (
+      provider.inclusionPriority ? 0) >= lowestIncludedPriority)
     stableSort matchingProviders, (providerA, providerB) =>
-      specificityA = @metadataForProvider(providerA).getSpecificity(scopeChain)
-      specificityB = @metadataForProvider(providerB).getSpecificity(scopeChain)
+      specificityA = new ProviderMetadata(providerA).getSpecificity(scopeChain)
+      specificityB = new ProviderMetadata(providerB).getSpecificity(scopeChain)
       difference = specificityB - specificityA
-      difference = (providerB.suggestionPriority ? 1) - (providerA.suggestionPriority ? 1) if difference is 0
+      difference = (providerB.suggestionPriority ? 1) -
+      (providerA.suggestionPriority ? 1) if difference is 0
       difference
 
 
