@@ -8,12 +8,16 @@ Provides a service API that you can register by scope name to send Async formatt
 * Takes care of command resolution to the correct scope and therefore provider
 * Takes care of applying the code edits in a manner that they can be easily undone (transactional)
 
-# Providers
+## Current Status - DEPRECATED in favor of [Atom IDE](https://ide.atom.io)
+
+We're not maintaining this package anymore, because Atom IDE has more features and is very well maintained.
+
+## Providers
 
 * [formatter-coffeescript](https://atom.io/packages/formatter-coffeescript)
 * [TypeScript](https://atom.io/packages/atom-typescript)
 
-# Keybindings
+## Keybindings
 
 Default (inspired from IntelliJ):
 ```cson
@@ -22,7 +26,7 @@ Default (inspired from IntelliJ):
   'alt-cmd-l': 'formatter:format-code'
 ```
 
-# API for Providers
+## API for Providers
 
 Given you understand these simple concepts:
 ```ts
